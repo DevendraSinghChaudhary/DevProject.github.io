@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<title>Pie Chart - User Input</title>  
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<style>
+    
+    #piechart {
+    height: 600px;
+    }
+    
+    label {
+    display: inline-block;
+    width: 100px;
+    }
+    
+    .range_s{
+      width: 300px;
+      height: 30px;
+    }
+    
+</style>
+</head>
+<body>
+
+
+  <div style="margin: 50px 100px; ">
+    <div style="float: right; width: 600px; height:600px" id="piechart"></div>
+    <center><div style="margin-left: 50px;" id="piechartd"><center><h1 style="">Compound Interest:<span id="result_value">0</span></h1></center></div></center>
+    <form style="padding: 50px 0px; margin-left:100px" id="form1" oninput="drawChart(); return false" >
+     <h2>Principal</h2><br>
+     <input type="range" min="1000" max="100000" value="1000" class="range_s" id="workvar" ><br><br>
+     <p id="range_first_txt"></p><br>
+     <h2>Interest Rate (%)</h2><br>
+     <input type="range" min="1" max="100" value="1" class="range_s" id="eatvar"><br><br>
+     <p id="range_second_txt"></p><br>
+     <h2>Interest Year</h2><br>
+     <input type="range" min="1" max="100" value="1" class="range_s" id="commutevar"><br>
+     <p id="range_third_txt"></p>
+  
+         
+     
+     </form>
+ 
+    </div>
+ 
+ 
+  <script>
+      //define the chart package
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      //set what is supposed to happen when the page loads. You typically want a state of the chart to show on load, but in this case, there is no data on load.
+      //google.charts.setOnLoadCallback(drawChart);
+     
+     //submit requires text inputs to use parseInt to work as numbers
+      function drawChart() {
+       work = parseInt(document.getElementById('workvar').value/1000);
+       eat = parseInt(document.getElementById('eatvar').value);
+       commute = parseInt(document.getElementById('commutevar').value);
+       
+       
+       //replace data with variable names
+       var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Week'],
+          ['Principal',     work],
+          ['Rate',      eat],
+          ['year',  commute],
+       
+        ]);
+        var options = {
+          title: 'Weekly Activities'
+        };
+    //the id is the DOM location to draw the chart    
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+      }
+
+
+    </script> 
+ 
+
+
+<script>
+var slider = document.getElementById("workvar");
+var output = document.getElementById("range_first_txt");
+output.innerHTML = slider.value;
+result_value.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+  result_value.innerHTML =   this.value;
+}
+
+var slider1 = document.getElementById("eatvar");
+var output1 = document.getElementById("range_second_txt");
+output1.innerHTML = slider1.value;
+result_value.innerHTML = slider1.value;
+
+slider1.oninput = function() {
+  output1.innerHTML = this.value;
+  result_value.innerHTML =   this.value;
+}
+
+
+var slider2 = document.getElementById("commutevar");
+var output2 = document.getElementById("range_third_txt");
+var result_value_s = document.getElementById("result_value");
+output2.innerHTML = slider2.value;
+result_value.innerHTML = slider2.value;
+
+slider2.oninput = function() {
+  output2.innerHTML = this.value;
+  result_value.innerHTML =   this.value;
+}
+
+
+</script>     
+</body>
+</html>

@@ -69,9 +69,7 @@ $colorcode : #fff;
 
 }
 
-@mixin samecontent{
-	text-align: center;
-}
+@import 'mixin';
 
 .main-content{
 	width: 100%;
@@ -81,13 +79,18 @@ $colorcode : #fff;
 	flex-direction: column;
 	justify-content: center;
 	align-items:center;
+	background-color:  #000;
 
 	h2{
-      @include samecontent;
+      @include samecontent(#e67e22);
 
 	}
 	p{
-		@include samecontent;
+		@include samecontent(#fff);
 		width: 500px;
 	}
+}
+
+#second{
+	@extend .main-content;
 }
